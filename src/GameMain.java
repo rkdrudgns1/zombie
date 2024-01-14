@@ -38,6 +38,8 @@ public class GameMain {
         User user2;
         User user3;
 
+        User users = new User();
+
         if(minute % 5 == 0) {
             user1 = new User(100, "유저1", 0, 10, 0);
             user2 = new User(100, "유저2", 0, 10, 0);
@@ -47,6 +49,8 @@ public class GameMain {
             user2 = new User(100, "유저2", 0, 0, 0);
             user3 = new User(100, "유저3", 0, 0, 0);
         }
+
+        Zombie zombies = new Zombie();
 
         Zombie realzombie;
 
@@ -120,12 +124,7 @@ public class GameMain {
 
             while(true)
             {
-                System.out.println("몇번을 선택할것인가?");
-                System.out.println("[1]전투시작, [2]상점, [3]아이템 개방, [4]로그아웃");
-                System.out.println("가지고 있는 소지금: " + realuser.money);
-                System.out.println("가지고 있는 포션: " + realuser.hpMedicineCounts);
-                System.out.println("가지고 있는 이름 변경권: " + realuser.changeNameCouponeCounts);
-                int select = scan.nextInt();;
+                int select = users.selectMenu(realuser);
 
                 if(select == 1)
                 {
@@ -133,76 +132,11 @@ public class GameMain {
                     int attackTurn = random.nextInt(12) + 1;
                     if(attackTurn%2 == 0)
                     {
-                        System.out.println(realuser.name+ "가 먼저 공격");
-                        while(true)
-                        {
-                            int userattack = random.nextInt(50) + 1;
-                            realzombie.hp -= userattack;
-
-                            if(realzombie.hp <= 0)
-                            {
-                                System.out.println(realzombie.name + "죽음.");
-                                realuser.money += 20;
-                                break;
-                            }
-                            int zombieattack = random.nextInt(30) + 1;
-                            realuser.hp -= zombieattack;
-
-                            if(realuser.hp <= 0)
-                            {
-                                if(realuser.hpMedicineCounts > 0) {
-                                    System.out.println("물약 사용!");
-                                    realuser.hpMedicineCounts--;
-                                    break;
-                                }
-                                else
-                                {
-                                    System.out.println(realuser.name + "죽음.");
-                                    if(realuser.money >=10)
-                                    {
-                                        realuser.money *= 0.9;
-                                    }
-                                    break;
-                                }
-                            }
-                        }
+                       users.attack(realuser, realzombie);
                     }
                     else
                     {
-                        System.out.println(realzombie.name + "가 먼저 공격");
-                        while(true)
-                        {
-                            int zombieattack = random.nextInt(30) + 1;
-                            user1.hp -= zombieattack;
-
-                            if(realuser.hp <= 0)
-                            {
-                                if(realuser.hpMedicineCounts > 0) {
-                                    System.out.println("물약 사용!");
-                                    realuser.hpMedicineCounts--;
-                                    break;
-                                }
-                                else
-                                {
-                                    System.out.println(realuser.name + "가 죽음.");
-                                    if(realuser.money >=10)
-                                    {
-                                        realuser.money *= 0.9;
-                                    }
-                                    break;
-                                }
-                            }
-
-                            int userattack = random.nextInt(50) + 1;
-                            zombie1.hp -= userattack;
-
-                            if(realzombie.hp <= 0)
-                            {
-                                System.out.println(realzombie.name + "가 죽음.");
-                                realuser.money += 20;
-                                break;
-                            }
-                        }
+                       zombies.attack(realuser, realzombie);
                     }
 
                 }
