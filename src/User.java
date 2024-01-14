@@ -94,6 +94,7 @@ public class User {
             else
             {
                 System.out.println("게임을 종료한다.");
+                System.exit(0);
             }
         }
     }
