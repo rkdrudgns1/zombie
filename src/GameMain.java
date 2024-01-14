@@ -241,6 +241,7 @@ public class GameMain {
                     else
                     {
                         System.out.println("상품이 없다.");
+                        System.out.println("TEST");
                     }
 
                 } else if(select == 3)
