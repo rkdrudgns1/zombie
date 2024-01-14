@@ -71,6 +71,7 @@ public class Zombie {
             }
             else
             {
+
                 System.out.println("좀비 정보가 없다.");
             }
         }
