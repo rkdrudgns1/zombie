@@ -68,59 +68,9 @@ public class GameMain {
         {
             System.out.println("게임을 시작!!");
 
-            while(true)
-            {
-                System.out.println("유저 몇번을 선택한것인가?");
-                System.out.println("게임 종료를 원한다면 0번");
-                int user = scan.nextInt();
+            realuser = users.choose(user1, user2, user3);
 
-                if(user == 1)
-                {
-                    realuser = user1;
-                    System.out.println(realuser.name + " 선택!");
-                    break;
-                }
-                else if(user == 2)
-                {
-                    realuser = user2;
-                    System.out.println(realuser.name + " 선택!");
-                    break;
-                }
-                else if(user ==3)
-                {
-                    realuser = user3;
-                    System.out.println(realuser.name + " 선택!");
-                    break;
-                }
-                else
-                {
-                    System.out.println("게임을 종료한다.");
-                    return;
-                }
-            }
-
-            while(true)
-            {
-                System.out.println("좀비 몇번을 선택한것인가?");
-                int zombie = scan.nextInt();
-
-                if(zombie == 1)
-                {
-                    realzombie = zombie1;
-                    System.out.println(realzombie.name + " 선택!");
-                    break;
-                }
-                else if(zombie == 2)
-                {
-                    realzombie = zombie2;
-                    System.out.println(realzombie.name + " 선택!");
-                    break;
-                }
-                else
-                {
-                    System.out.println("좀비 정보가 없다.");
-                }
-            }
+            realzombie = zombies.choose(zombie1, zombie2);
 
             while(true)
             {
@@ -129,6 +79,7 @@ public class GameMain {
                 if(select == 1)
                 {
                     System.out.println("전투 시작!");
+
                     int attackTurn = random.nextInt(12) + 1;
                     if(attackTurn%2 == 0)
                     {
@@ -142,87 +93,10 @@ public class GameMain {
                 }
                 else if(select == 2)
                 {
-                    System.out.println("어떤 물건을 구매할건가요?");
-                    System.out.println("[1] 체력물약 50원, [2] 이름변경쿠폰 200원");
-                    int selectproduct = scan.nextInt();
-
-                    if(selectproduct == 1)
-                    {
-                        if(realuser.money >= 50)
-                        {
-                            realuser.hpMedicineCounts ++;
-                            realuser.money -= 50;
-                            System.out.println("체력 물약 구매!");
-                        }
-                        else
-                        {
-                            System.out.println("돈이 부족!");
-                        }
-                    }
-                    else if(selectproduct == 2)
-                    {
-                        if(realuser.money >= 200)
-                        {
-                            realuser.changeNameCouponeCounts ++;
-                            realuser.money -= 200;
-                            System.out.println("이름변경쿠폰 구매!");
-                        }
-                        else
-                        {
-                            System.out.println("돈이 부족!");
-                        }
-                    }
-                    else
-                    {
-                        System.out.println("상품이 없다.");
-                        System.out.println("TEST");
-                    }
-
+                    casher.usershop(realuser);
                 } else if(select == 3)
                 {
-                    System.out.println("아이템 가방을 열였다.");
-                    System.out.println("현재 체력 물약: " + realuser.hpMedicineCounts + "개");
-                    System.out.println("현재 이름 변경 쿠폰: " + realuser.changeNameCouponeCounts + "개");
-                    System.out.println("몇번을 선택?");
-                    System.out.println("[1]체력 물약 판매, [2]이름변경권 판매, [3]이름변경권 사용, [4]나가기");
-
-                    int itemselect = scan.nextInt();
-                    if(itemselect == 1)
-                    {
-                        System.out.println("체력 물약 판매!");
-                        realuser.money += 30;
-                    }
-                    else if(itemselect == 2)
-                    {
-                        System.out.println("이름변경권 판매!");
-                        realuser.money += 100;
-                    }
-                    else if(itemselect == 3)
-                    {
-                        System.out.println("이름 변경권을 사용한 것인가?");
-                        System.out.println("[1]사용, [2]사용 안함.");
-                        int use = scan.nextInt();
-
-                        scan.nextLine();
-
-                        if(use == 1)
-                        {
-                            if(realuser.changeNameCouponeCounts > 0)
-                            {
-                                realuser.changeNameCouponeCounts --;
-                                System.out.println("이름 입력: ");
-                                realuser.name = scan.nextLine();
-                            }
-                           else
-                           {
-                               System.out.println("개수 부족!");
-                           }
-                        }
-                        else if(use == 2)
-                        {
-                            break;
-                        }
-                    }
+                    users.openItem(realuser);
                 }
                 else
                 {

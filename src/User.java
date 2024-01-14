@@ -46,6 +46,7 @@ public class User {
                 if(realuser.hpMedicineCounts > 0) {
                     System.out.println("물약 사용!");
                     realuser.hpMedicineCounts--;
+                    realuser.hp += 70;
                 }
                 else
                 {
@@ -56,6 +57,93 @@ public class User {
                     }
                     break;
                 }
+            }
+        }
+    }
+
+    public User choose(User user1, User user2, User user3)
+    {
+        while(true)
+        {
+            Scanner scan = new Scanner(System.in);
+
+            User realuser;
+
+            System.out.println("유저 몇번을 선택한것인가?");
+            System.out.println("게임 종료를 원한다면 0번");
+            int user = scan.nextInt();
+
+            if(user == 1)
+            {
+                realuser = user1;
+                System.out.println(realuser.name + " 선택!");
+                return realuser;
+            }
+            else if(user == 2)
+            {
+                realuser = user2;
+                System.out.println(realuser.name + " 선택!");
+                return realuser;
+            }
+            else if(user ==3)
+            {
+                realuser = user3;
+                System.out.println(realuser.name + " 선택!");
+                return realuser;
+            }
+            else
+            {
+                System.out.println("게임을 종료한다.");
+            }
+        }
+    }
+
+    public void openItem(User realuser)
+    {
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("아이템 가방을 열였다.");
+        System.out.println("현재 체력 물약: " + realuser.hpMedicineCounts + "개");
+        System.out.println("현재 이름 변경 쿠폰: " + realuser.changeNameCouponeCounts + "개");
+        System.out.println("몇번을 선택?");
+        System.out.println("[1]체력 물약 판매, [2]이름변경권 판매, [3]이름변경권 사용, [4]나가기");
+
+        int itemselect = scan.nextInt();
+        if(itemselect == 1)
+        {
+            System.out.println("체력 물약 판매!");
+            realuser.money += 30;
+        }
+        else if(itemselect == 2)
+        {
+            System.out.println("이름변경권 판매!");
+            realuser.money += 100;
+        }
+        else if(itemselect == 3)
+        {
+            System.out.println("이름 변경권을 사용한 것인가?");
+            System.out.println("[1]사용, [2]사용 안함.");
+            int use = scan.nextInt();
+
+            scan.nextLine();
+
+            if(use == 1)
+            {
+                if(realuser.changeNameCouponeCounts > 0)
+                {
+                    realuser.changeNameCouponeCounts --;
+                    System.out.println("이름 입력: ");
+                    realuser.name = scan.nextLine();
+                }
+                else
+                {
+                    System.out.println("개수 부족!");
+                }
+            }
+            else if(use == 2)
+            {
+                return;
             }
         }
     }
