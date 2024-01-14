@@ -7,6 +7,7 @@ public class Casher {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("상점에 오신걸 환영합니다!!");
+
         System.out.println("어떤 물건을 구매할건가요?");
         System.out.println("[1] 체력물약 50원, [2] 이름변경쿠폰 200원");
         int selectproduct = scan.nextInt();
